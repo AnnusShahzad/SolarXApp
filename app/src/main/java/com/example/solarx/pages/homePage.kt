@@ -228,7 +228,7 @@ fun DashboardView(IP: String, SN: String, paddingValues: PaddingValues, modifier
                 WAPDA = generateRandomNumber().GridValue.toInt()
                 SOLAR = generateRandomNumber().SolarValue.toInt()
             }
-            delay(1500)
+            delay(1000)
         }
     }
     var BoxSize by remember { mutableStateOf(Size.Zero)}
@@ -450,7 +450,7 @@ fun DetailView(IP: String, SN: String, paddingValues: PaddingValues, modifier: M
                 WAPDA = generateRandomNumber().GridValue.toInt()
                 SOLAR = generateRandomNumber().SolarValue.toInt()
             }
-            delay(1500)
+            delay(1000)
         }
     }
     val defaultColor by remember {

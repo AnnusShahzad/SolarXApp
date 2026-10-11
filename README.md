@@ -4,7 +4,7 @@
 
 ## Highlights
 
-- ⚡ **Live dashboard**: polls the SolaX API about every 1.5 seconds and updates the readings immediately
+- ⚡ **Live dashboard**: polls the SolaX API every 1 second and updates the readings immediately
 - ⚠️ **Grid-power warning**: set a WAPDA threshold in watts, and the app warns you when grid draw exceeds it
 - 🔐 **Login and settings screens**: store your inverter credentials and turn grid monitoring on or off
 - 🏗️ **MVVM architecture**: `ViewModel`s handle state and Retrofit handles the API
