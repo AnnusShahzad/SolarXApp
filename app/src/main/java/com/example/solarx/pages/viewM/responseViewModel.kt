@@ -39,7 +39,7 @@ class responseViewModel(SharedIPAddress:String,SharedPocketWIFISN:String): ViewM
         .post(formBody)
         .build()
 
-    fun getRealTimeData(callback: (Array<Int>) -> Unit) {
+    fun getRealTimeData(onError: (Exception) -> Unit = {}, callback: (Array<Int>) -> Unit) {
         viewModelScope.launch {
             try {
                 val response = withContext(Dispatchers.IO) { client.newCall(request).execute() }
@@ -49,9 +49,7 @@ class responseViewModel(SharedIPAddress:String,SharedPocketWIFISN:String): ViewM
             }
             catch (e: Exception)
             {
-                when(e) {
-                    is SocketException -> {}
-                }
+                onError(e)
             }
         }
     }

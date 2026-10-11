@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.PathMeasure
 import android.util.Log
-import android.widget.Toast
 import androidx.compose.animation.core.EaseInSine
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -67,7 +66,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.solarx.R
-import com.example.solarx.generateRandomNumber
 import com.example.solarx.pages.viewM.responseViewModel
 import com.example.solarx.ui.theme.SolarXTheme
 import kotlinx.coroutines.delay
@@ -212,21 +210,15 @@ fun DashboardView(IP: String, SN: String, paddingValues: PaddingValues, modifier
     val context = LocalContext.current
     var WAPDA: Int by remember { mutableIntStateOf(0) }
     var SOLAR: Int by remember { mutableIntStateOf(0) }
+    var isOnline by remember { mutableStateOf(true) }
     val t = responseViewModel(IP, SN)
     LaunchedEffect(Unit) {
         while (true)
         {
-            try {
-                t.getRealTimeData {
-                        result ->
-                    WAPDA = (bit32(result[29],result[30]).toInt() * 0.1).toInt()
-                    SOLAR = result[9]
-                }
-            }
-            catch (ex: Exception) {
-                Toast.makeText(context, ex.message, Toast.LENGTH_SHORT).show()
-                WAPDA = generateRandomNumber().GridValue.toInt()
-                SOLAR = generateRandomNumber().SolarValue.toInt()
+            t.getRealTimeData(onError = { isOnline = false }) { result ->
+                WAPDA = (bit32(result[29],result[30]).toInt() * 0.1).toInt()
+                SOLAR = result[9]
+                isOnline = true
             }
             delay(1000)
         }
@@ -293,6 +285,7 @@ fun DashboardView(IP: String, SN: String, paddingValues: PaddingValues, modifier
 //        verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        if (!isOnline) OfflineBanner()
         Box (
             modifier = Modifier
                 .weight(5f)
@@ -426,29 +419,34 @@ fun DashboardView(IP: String, SN: String, paddingValues: PaddingValues, modifier
     }
 }
 
-data class RandomValues(val GridValue: Number, val SolarValue: Number, val LoadValue:Number)
+@Composable
+fun OfflineBanner() {
+    Text(
+        text = "Inverter unreachable · showing last reading",
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(MaterialTheme.colorScheme.errorContainer)
+            .padding(8.dp),
+        color = MaterialTheme.colorScheme.onErrorContainer,
+        fontSize = 14.sp,
+    )
+}
 
 @Composable
 fun DetailView(IP: String, SN: String, paddingValues: PaddingValues, modifier: Modifier = Modifier) {
 
-    var WAPDA: Int by remember { mutableIntStateOf(500) }
-    var SOLAR: Int by remember { mutableIntStateOf(500) }
+    var WAPDA: Int by remember { mutableIntStateOf(0) }
+    var SOLAR: Int by remember { mutableIntStateOf(0) }
+    var isOnline by remember { mutableStateOf(true) }
     var context = LocalContext.current
     val t = responseViewModel(IP, SN)
     LaunchedEffect(Unit) {
         while (true)
         {
-            try {
-                t.getRealTimeData {
-                    result ->
-                    WAPDA = (bit32(result[29],result[30]).toInt() * 0.1).toInt()
-                    SOLAR = result[9]
-                }
-            }
-            catch (ex: Exception) {
-                Toast.makeText(context, ex.message, Toast.LENGTH_SHORT).show()
-                WAPDA = generateRandomNumber().GridValue.toInt()
-                SOLAR = generateRandomNumber().SolarValue.toInt()
+            t.getRealTimeData(onError = { isOnline = false }) { result ->
+                WAPDA = (bit32(result[29],result[30]).toInt() * 0.1).toInt()
+                SOLAR = result[9]
+                isOnline = true
             }
             delay(1000)
         }
@@ -482,6 +480,7 @@ fun DetailView(IP: String, SN: String, paddingValues: PaddingValues, modifier: M
             )
         }
         HorizontalDivider()
+        if (!isOnline) OfflineBanner()
         DetailEntity(
             titleText = (if(WAPDA < 0) "From" else "To") + " Grid",
             data = "${WAPDA} W",

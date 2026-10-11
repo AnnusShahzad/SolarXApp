@@ -17,25 +17,16 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.solarx.pages.HomePage
 import com.example.solarx.pages.LoginPage
-import com.example.solarx.pages.RandomValues
 import com.example.solarx.ui.theme.SolarXTheme
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.random.Random
 
 enum class AppScreen {
     Login,
     Dashboard,
     Details,
     Settings
-}
-
-fun generateRandomNumber(): RandomValues {
-    return RandomValues(
-        Random.nextInt(-10, 10),// Generates a random number between 0 and 99
-        Random.nextInt(0, 1000),// Generates a random number between 0 and 99
-        Random.nextInt(0, 1000))// Generates a random number between 0 and 99
 }
 
 @Composable
