@@ -2,15 +2,17 @@ package io.github.annusshahzad.solarx.ui.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -26,6 +28,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.LiveRegionMode
@@ -68,78 +71,91 @@ fun LoginScreen(
     onSerialChange: (String) -> Unit,
     onLogin: () -> Unit,
 ) {
+    // Close the keyboard on submit so the result (an error message or the spinner) is visible.
+    val focusManager = LocalFocusManager.current
+    val submit = {
+        focusManager.clearFocus()
+        onLogin()
+    }
     Surface(modifier = Modifier.fillMaxSize()) {
-        Column(
-            modifier = Modifier
-                .safeDrawingPadding()
-                .imePadding()
-                .verticalScroll(rememberScrollState())
-                .padding(horizontal = 24.dp, vertical = 48.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-        ) {
-            Image(
-                painter = painterResource(R.mipmap.ic_launcher),
-                contentDescription = null,
-                modifier = Modifier.size(96.dp),
-            )
-            Text(text = stringResource(R.string.app_name), style = MaterialTheme.typography.displaySmall)
-            Text(
-                text = stringResource(R.string.login_tagline),
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-            Spacer(Modifier.height(16.dp))
-
-            OutlinedTextField(
-                value = state.host,
-                onValueChange = onHostChange,
-                label = { Text(stringResource(R.string.login_host_label)) },
-                supportingText = { Text(stringResource(R.string.login_host_hint)) },
-                singleLine = true,
-                enabled = !state.isLoading,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Uri, imeAction = ImeAction.Next),
-                modifier = Modifier.fillMaxWidth(),
-            )
-            OutlinedTextField(
-                value = state.serial,
-                onValueChange = onSerialChange,
-                label = { Text(stringResource(R.string.login_serial_label)) },
-                supportingText = { Text(stringResource(R.string.login_serial_hint)) },
-                singleLine = true,
-                enabled = !state.isLoading,
-                keyboardOptions = KeyboardOptions(
-                    capitalization = KeyboardCapitalization.Characters,
-                    autoCorrect = false,
-                    keyboardType = KeyboardType.Ascii,
-                    imeAction = ImeAction.Done,
-                ),
-                keyboardActions = KeyboardActions(onDone = { onLogin() }),
-                modifier = Modifier.fillMaxWidth(),
-            )
-
-            state.error?.let { error ->
+        // safeDrawing includes the keyboard, so the form shrinks above it and scrolls when needed.
+        BoxWithConstraints(Modifier.safeDrawingPadding(), contentAlignment = Alignment.TopCenter) {
+            Column(
+                modifier = Modifier
+                    // Keep the form a comfortable width in landscape and on tablets.
+                    .widthIn(max = 480.dp)
+                    .fillMaxWidth()
+                    .verticalScroll(rememberScrollState())
+                    .heightIn(min = maxHeight)
+                    .padding(horizontal = 24.dp, vertical = 32.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                // Centred on tall screens instead of leaving a gap under the button.
+                verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
+            ) {
+                Image(
+                    painter = painterResource(R.mipmap.ic_launcher),
+                    contentDescription = null,
+                    modifier = Modifier.size(96.dp),
+                )
+                Text(text = stringResource(R.string.app_name), style = MaterialTheme.typography.displaySmall)
                 Text(
-                    text = error.message(state.host.trim()),
-                    color = MaterialTheme.colorScheme.error,
-                    style = MaterialTheme.typography.bodyMedium,
+                    text = stringResource(R.string.login_tagline),
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+                Spacer(Modifier.height(16.dp))
+
+                OutlinedTextField(
+                    value = state.host,
+                    onValueChange = onHostChange,
+                    label = { Text(stringResource(R.string.login_host_label)) },
+                    supportingText = { Text(stringResource(R.string.login_host_hint)) },
+                    singleLine = true,
+                    enabled = !state.isLoading,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Uri, imeAction = ImeAction.Next),
+                    modifier = Modifier.fillMaxWidth(),
+                )
+                OutlinedTextField(
+                    value = state.serial,
+                    onValueChange = onSerialChange,
+                    label = { Text(stringResource(R.string.login_serial_label)) },
+                    supportingText = { Text(stringResource(R.string.login_serial_hint)) },
+                    singleLine = true,
+                    enabled = !state.isLoading,
+                    keyboardOptions = KeyboardOptions(
+                        capitalization = KeyboardCapitalization.Characters,
+                        autoCorrect = false,
+                        // The serial is the dongle's password: a password keyboard won't learn or suggest it.
+                        keyboardType = KeyboardType.Password,
+                        imeAction = ImeAction.Done,
+                    ),
+                    keyboardActions = KeyboardActions(onDone = { submit() }),
+                    modifier = Modifier.fillMaxWidth(),
+                )
+
+                state.error?.let { error ->
+                    Text(
+                        text = error.message(state.host.trim()),
+                        color = MaterialTheme.colorScheme.error,
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .semantics { liveRegion = LiveRegionMode.Polite },
+                    )
+                }
+
+                Button(
+                    onClick = submit,
+                    enabled = !state.isLoading,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .semantics { liveRegion = LiveRegionMode.Polite },
-                )
-            }
-
-            Button(
-                onClick = onLogin,
-                enabled = !state.isLoading,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(52.dp),
-            ) {
-                if (state.isLoading) {
-                    CircularProgressIndicator(modifier = Modifier.size(24.dp), strokeWidth = 2.dp)
-                } else {
-                    Text(stringResource(R.string.login_button))
+                        .height(52.dp),
+                ) {
+                    if (state.isLoading) {
+                        CircularProgressIndicator(modifier = Modifier.size(24.dp), strokeWidth = 2.dp)
+                    } else {
+                        Text(stringResource(R.string.login_button))
+                    }
                 }
             }
         }

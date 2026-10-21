@@ -2,6 +2,8 @@
 
 <img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" alt="SolarX icon" width="96">
 
+<img src="docs/screenshots/dashboard-alert-dark.png" alt="SolarX dashboard" width="260">
+
 # SolarX
 
 **A real-time Android monitor for SolaX solar inverters: live energy flow, grid import/export and a configurable grid-power alert, straight from the inverter over your local network.**
@@ -27,23 +29,25 @@ SolaX inverters ship with a Pocket WiFi dongle that uploads data to the vendor c
 
 | Feature | What it does |
 | --- | --- |
-| **Live energy flow** | An animated diagram connects solar, grid and home load, with dots that show which way power is moving. Readings refresh every second. |
+| **Live energy flow** | Solar, grid and home-load tiles show their readings, and animated dots on the wires show which way power is moving. Readings refresh every second. |
 | **Grid power alert** | Set a limit in watts, and a warning banner appears whenever the house draws more than that from the grid. Useful for spotting heavy loads during load-shedding hours or on expensive tariffs. |
 | **Details view** | Grid exchange, solar output and home load at a glance. |
 | **Resilient polling** | When the inverter drops off the network, the last reading stays on screen with an offline banner, and polling resumes automatically. Polling pauses when the app is in the background to save battery. |
 | **Clear connection errors** | Separate messages for a missing field, an invalid address, a rejected serial and an unreachable inverter. |
 | **Private by design** | No backend, analytics or cloud. The saved serial (the dongle's password) is excluded from backups and device transfers. |
-| **Light and dark themes** | Material 3 styling with accessibility labels on the diagram and status banners. |
+| **Light and dark themes** | Material 3 styling that adapts to large system fonts, landscape and split screen, with accessibility labels on the diagram and status banners. |
 
 ## Screenshots
 
-| Dashboard (exporting) | Grid alert (importing) | Offline, dark theme |
-| --- | --- | --- |
-| ![Dashboard while exporting to the grid](app/src/test/snapshots/images/io.github.annusshahzad.solarx.ui_ScreenshotTest_dashboardExporting.png) | ![Dashboard with the grid alert banner](app/src/test/snapshots/images/io.github.annusshahzad.solarx.ui_ScreenshotTest_dashboardImportingWithAlert.png) | ![Dashboard offline in dark theme](app/src/test/snapshots/images/io.github.annusshahzad.solarx.ui_ScreenshotTest_dashboardOfflineDark.png) |
-| **Connect** | **Details** | **Settings** |
-| ![Connection screen](app/src/test/snapshots/images/io.github.annusshahzad.solarx.ui_ScreenshotTest_login.png) | ![Details tab](app/src/test/snapshots/images/io.github.annusshahzad.solarx.ui_ScreenshotTest_details.png) | ![Settings tab](app/src/test/snapshots/images/io.github.annusshahzad.solarx.ui_ScreenshotTest_settings.png) |
+Captured on a Pixel 3 (Android 15) connected to a real SolaX inverter, so the readings are live, not mock data.
 
-These images are the golden files of the [Paparazzi screenshot tests](app/src/test/java/io/github/annusshahzad/solarx/ui/ScreenshotTest.kt), so they always match the current code.
+| Dashboard with grid alert | Details | Settings |
+| --- | --- | --- |
+| ![Dashboard with the grid alert banner, dark theme](docs/screenshots/dashboard-alert-dark.png) | ![Details tab, dark theme](docs/screenshots/details-dark.png) | ![Settings tab, dark theme](docs/screenshots/settings-dark.png) |
+| **Dashboard, light theme** | **Connect, light theme** | **Connect, dark theme** |
+| ![Dashboard, light theme](docs/screenshots/dashboard-light.png) | ![Connection screen, light theme](docs/screenshots/login-light.png) | ![Connection screen, dark theme](docs/screenshots/login-dark.png) |
+
+Every screen also has a [Paparazzi screenshot test](app/src/test/java/io/github/annusshahzad/solarx/ui/ScreenshotTest.kt), so layout changes are caught in CI.
 
 ## Tech stack
 

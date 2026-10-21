@@ -4,6 +4,25 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-10-21
+
+Polish from testing on a real phone and inverter.
+
+### Changed
+- Dashboard tiles now show their name and reading inside the icon, and the flow dots stay on the wires between tiles instead of sliding underneath them.
+- Complete warm colour scheme for light and dark themes; no default purple left on buttons, switches or the navigation bar.
+- Details tab shows each reading large and bold, and Settings has the same header as Details.
+- The connection screen is centred and keeps a comfortable width in landscape.
+
+### Fixed
+- Diagram tiles overlapped at large system font sizes; they now scale with the font but never exceed the available space.
+- The dashboard, details and settings could be cut off in landscape; they now scroll.
+- The keyboard stayed open after tapping Connect and hid error messages.
+- The keyboard's Done key didn't save the alert threshold.
+- The keyboard learned and suggested the Pocket WiFi serial; the field now uses a password keyboard.
+- Long navigation labels wrapped onto two lines at the largest font size.
+- The window flashed white when the app opened in dark mode.
+
 ## [1.0.0] - 2026-10-21
 
 First public release.
@@ -32,5 +51,6 @@ First public release.
 - Release builds are minified with R8, reducing the APK from 19.8 MB to about 2.3 MB.
 - The saved serial number is excluded from backups and device transfers.
 
-[Unreleased]: https://github.com/AnnusShahzad/SolarXApp/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/AnnusShahzad/SolarXApp/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/AnnusShahzad/SolarXApp/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/AnnusShahzad/SolarXApp/releases/tag/v1.0.0

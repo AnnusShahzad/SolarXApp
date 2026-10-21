@@ -6,7 +6,10 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.toggleable
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.ListItem
@@ -23,6 +26,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import io.github.annusshahzad.solarx.R
 import io.github.annusshahzad.solarx.data.GridAlert
@@ -43,8 +47,10 @@ fun SettingsScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(contentPadding),
+            .padding(contentPadding)
+            .verticalScroll(rememberScrollState()),
     ) {
+        ScreenHeader(stringResource(R.string.tab_settings))
         ListItem(
             modifier = Modifier.toggleable(
                 value = gridAlert.enabled,
@@ -105,7 +111,8 @@ private fun ThresholdDialog(initial: Int, onDismiss: () -> Unit, onSave: (Int) -
                     suffix = { Text("W") },
                     isError = threshold == null,
                     supportingText = { if (threshold == null) Text(stringResource(R.string.settings_threshold_error)) },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Done),
+                    keyboardActions = KeyboardActions(onDone = { threshold?.let(onSave) }),
                 )
             }
         },
