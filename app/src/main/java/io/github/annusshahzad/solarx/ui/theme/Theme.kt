@@ -8,22 +8,65 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
     primary = Amber80,
-    secondary = Teal80,
+    onPrimary = Amber20,
+    primaryContainer = Amber30,
+    onPrimaryContainer = Amber90,
+    secondary = Brown80,
+    onSecondary = Brown20,
+    secondaryContainer = Brown30,
+    onSecondaryContainer = Brown90,
     tertiary = Slate80,
-    surfaceVariant = WarmGrey30,
-    surfaceContainerHighest = WarmGrey30,
+    onTertiary = Slate20,
+    tertiaryContainer = Slate30,
+    onTertiaryContainer = Slate90,
+    background = NeutralDark,
+    onBackground = OnNeutralDark,
+    surface = NeutralDark,
+    onSurface = OnNeutralDark,
+    surfaceVariant = NeutralVariantDark,
+    onSurfaceVariant = OnNeutralVariantDark,
+    surfaceTint = Amber80,
+    outline = OutlineDark,
+    outlineVariant = NeutralVariantDark,
+    surfaceContainerLowest = ContainerLowestDark,
+    surfaceContainerLow = ContainerLowDark,
+    surfaceContainer = ContainerDark,
+    surfaceContainerHigh = ContainerHighDark,
+    surfaceContainerHighest = ContainerHighestDark,
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = Amber40,
-    secondary = Teal40,
+    onPrimary = Color.White,
+    primaryContainer = Amber90,
+    onPrimaryContainer = Amber10,
+    secondary = Brown40,
+    onSecondary = Color.White,
+    secondaryContainer = Brown90,
+    onSecondaryContainer = Brown10,
     tertiary = Slate40,
-    surfaceVariant = WarmGrey90,
-    surfaceContainerHighest = WarmGrey90,
+    onTertiary = Color.White,
+    tertiaryContainer = Slate90,
+    onTertiaryContainer = Slate10,
+    background = NeutralLight,
+    onBackground = OnNeutralLight,
+    surface = NeutralLight,
+    onSurface = OnNeutralLight,
+    surfaceVariant = NeutralVariantLight,
+    onSurfaceVariant = OnNeutralVariantLight,
+    surfaceTint = Amber40,
+    outline = OutlineLight,
+    outlineVariant = NeutralVariantLight,
+    surfaceContainerLowest = ContainerLowestLight,
+    surfaceContainerLow = ContainerLowLight,
+    surfaceContainer = ContainerLight,
+    surfaceContainerHigh = ContainerHighLight,
+    surfaceContainerHighest = ContainerHighestLight,
 )
 
 @Composable

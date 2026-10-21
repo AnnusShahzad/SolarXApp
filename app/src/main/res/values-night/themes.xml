@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark window background in dark mode, so launching the app doesn't flash white. -->
+    <style name="Theme.SolarX" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">#FF19120C</item>
+    </style>
+</resources>
