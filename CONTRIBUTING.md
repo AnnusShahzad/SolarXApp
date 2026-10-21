@@ -10,7 +10,7 @@ Thanks for your interest in improving SolarX! Bug reports, feature ideas, docume
 
 ## Local setup
 
-Requirements: Android Studio (or the Android SDK with platform 34) and JDK 17 or newer.
+Requirements: Android Studio (or the Android SDK with platform 37) and JDK 21 or newer.
 
 ```bash
 git clone https://github.com/AnnusShahzad/SolarXApp.git

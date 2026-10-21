@@ -11,7 +11,7 @@
 [![CI](https://github.com/AnnusShahzad/SolarXApp/actions/workflows/ci.yml/badge.svg)](https://github.com/AnnusShahzad/SolarXApp/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/AnnusShahzad/SolarXApp/actions/workflows/codeql.yml/badge.svg)](https://github.com/AnnusShahzad/SolarXApp/actions/workflows/codeql.yml)
 [![Release](https://img.shields.io/github/v/release/AnnusShahzad/SolarXApp)](https://github.com/AnnusShahzad/SolarXApp/releases/latest)
-![Kotlin](https://img.shields.io/badge/Kotlin-1.9-7F52FF?logo=kotlin&logoColor=white)
+![Kotlin](https://img.shields.io/badge/Kotlin-2.4-7F52FF?logo=kotlin&logoColor=white)
 ![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-Material%203-4285F4?logo=jetpackcompose&logoColor=white)
 ![Android](https://img.shields.io/badge/Android-10%2B-3DDC84?logo=android&logoColor=white)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -122,7 +122,7 @@ SolarX reads solar power from `Data[9]`, and grid power from the signed 32-bit p
 
 ### Build from source
 
-Requires Android Studio (or the Android SDK with platform 34) and JDK 17+.
+Requires Android Studio (or the Android SDK with platform 37) and JDK 21+.
 
 ```bash
 git clone https://github.com/AnnusShahzad/SolarXApp.git

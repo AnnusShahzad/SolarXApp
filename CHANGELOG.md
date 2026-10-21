@@ -4,6 +4,11 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+### Changed
+- Upgraded the toolchain: Gradle 9.8, Android Gradle Plugin 9.4 with built-in Kotlin, Kotlin 2.4 with the Compose compiler plugin, compileSdk 37 and targetSdk 36. Android 10 (API 29) is still the minimum.
+- Upgraded AndroidX (Compose BOM 2026.09, Core 1.19, Lifecycle 2.11, Activity 1.13, Navigation 2.10), OkHttp 5.5 and Paparazzi 2.0.
+- CI and releases build with JDK 21.
+
 ## [1.1.0] - 2026-10-21
 
 Polish from testing on a real phone and inverter.

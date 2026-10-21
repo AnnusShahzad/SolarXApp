@@ -2,8 +2,6 @@ package io.github.annusshahzad.solarx.ui.monitor
 
 import androidx.activity.compose.BackHandler
 import androidx.annotation.StringRes
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -70,6 +68,6 @@ fun HomeRoute(
 @Composable
 private fun Tab.icon(): ImageVector = when (this) {
     Tab.Dashboard -> ImageVector.vectorResource(R.drawable.baseline_dashboard_24)
-    Tab.Details -> Icons.Filled.Info
+    Tab.Details -> ImageVector.vectorResource(R.drawable.baseline_info_24)
     Tab.Settings -> ImageVector.vectorResource(R.drawable.baseline_settings_24)
 }

@@ -8,7 +8,7 @@ updates:
       androidx:
         patterns: ["androidx.*"]
       kotlin-and-agp:
-        patterns: ["org.jetbrains.kotlin*", "com.android*"]
+        patterns: ["org.jetbrains.kotlin*", "com.android*", "app.cash.paparazzi*"]
   - package-ecosystem: github-actions
     directory: /
     schedule:
