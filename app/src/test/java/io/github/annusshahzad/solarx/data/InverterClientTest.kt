@@ -1,8 +1,8 @@
 package io.github.annusshahzad.solarx.data
 
 import kotlinx.coroutines.runBlocking
-import okhttp3.mockwebserver.MockResponse
-import okhttp3.mockwebserver.MockWebServer
+import mockwebserver3.MockResponse
+import mockwebserver3.MockWebServer
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -28,7 +28,7 @@ class InverterClientTest {
 
     @After
     fun tearDown() {
-        server.shutdown()
+        server.close()
     }
 
     private fun realTimeBody(solar: Int, gridLow: Int, gridHigh: Int): String {
@@ -50,20 +50,20 @@ class InverterClientTest {
 
     @Test
     fun `verifySerial posts the password check form`() = runBlocking {
-        server.enqueue(MockResponse().setBody("Y"))
+        server.enqueue(MockResponse(body = "Y"))
 
         assertTrue(client.verifySerial(connection))
 
         val request = server.takeRequest()
         assertEquals("POST", request.method)
-        assertEquals("/", request.path)
-        assertEquals("optType=newParaSetting&subOption=pwd&Value=SABC123XYZ", request.body.readUtf8())
+        assertEquals("/", request.target)
+        assertEquals("optType=newParaSetting&subOption=pwd&Value=SABC123XYZ", request.body?.utf8())
     }
 
     @Test
     fun `verifySerial is false when the dongle rejects the serial`() = runBlocking {
-        server.enqueue(MockResponse().setBody("N"))
-        server.enqueue(MockResponse().setBody(""))
+        server.enqueue(MockResponse(body = "N"))
+        server.enqueue(MockResponse(body = ""))
 
         assertFalse(client.verifySerial(connection))
         assertFalse(client.verifySerial(connection))
@@ -71,25 +71,25 @@ class InverterClientTest {
 
     @Test
     fun `readRealTimeData posts the read form and parses the reading`() = runBlocking {
-        server.enqueue(MockResponse().setBody(realTimeBody(solar = 2_400, gridLow = 8_000, gridHigh = 0)))
+        server.enqueue(MockResponse(body = realTimeBody(solar = 2_400, gridLow = 8_000, gridHigh = 0)))
 
         val reading = client.readRealTimeData(connection)
 
         assertEquals(InverterReading(solarW = 2_400, gridW = 800), reading)
-        assertEquals("optType=ReadRealTimeData&pwd=SABC123XYZ", server.takeRequest().body.readUtf8())
+        assertEquals("optType=ReadRealTimeData&pwd=SABC123XYZ", server.takeRequest().body?.utf8())
     }
 
     @Test
     fun `HTTP errors become IOExceptions`() {
-        server.enqueue(MockResponse().setResponseCode(500))
+        server.enqueue(MockResponse(code = 500))
         assertThrowsIOException { client.readRealTimeData(connection) }
     }
 
     @Test
     fun `malformed responses become IOExceptions`() {
-        server.enqueue(MockResponse().setBody("not json"))
-        server.enqueue(MockResponse().setBody("""{"Data":[1,2,3]}"""))
-        server.enqueue(MockResponse().setBody("""{"Information":[]}"""))
+        server.enqueue(MockResponse(body = "not json"))
+        server.enqueue(MockResponse(body = """{"Data":[1,2,3]}"""))
+        server.enqueue(MockResponse(body = """{"Information":[]}"""))
 
         repeat(3) { assertThrowsIOException { client.readRealTimeData(connection) } }
     }
@@ -97,7 +97,7 @@ class InverterClientTest {
     @Test
     fun `an unreachable inverter becomes an IOException`() {
         val port = server.port
-        server.shutdown()
+        server.close()
         assertThrowsIOException {
             client.readRealTimeData(InverterConnection(host = "127.0.0.1:$port", serial = "SABC123XYZ"))
         }

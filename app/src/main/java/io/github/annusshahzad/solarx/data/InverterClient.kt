@@ -68,7 +68,7 @@ class InverterClient(private val http: OkHttpClient = defaultHttpClient()) {
                 val result = runCatching {
                     response.use {
                         if (!it.isSuccessful) throw IOException("Inverter responded with HTTP ${it.code}")
-                        it.body?.string().orEmpty()
+                        it.body.string()
                     }
                 }
                 continuation.resumeWith(result)
