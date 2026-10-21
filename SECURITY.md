@@ -2,7 +2,7 @@
 
 ## Supported versions
 
-Security fixes are made on the latest release and on `master`.
+Security fixes are made on the latest release and on `main`.
 
 ## Reporting a vulnerability
 

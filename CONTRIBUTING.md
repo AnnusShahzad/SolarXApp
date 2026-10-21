@@ -37,7 +37,7 @@ To try the app against a real inverter, install it on a phone that is on the sam
 
 ## Making a change
 
-1. Fork the repository and create a branch from `master`, e.g. `fix/offline-banner` or `feat/daily-yield`.
+1. Fork the repository and create a branch from `main`, e.g. `fix/offline-banner` or `feat/daily-yield`.
 2. Keep the change focused on one thing, and match the style of the surrounding code.
 3. Add or update tests for behaviour you change. If you change a screen on purpose, re-record its screenshots with `./gradlew recordPaparazziDebug` and commit the new images.
 4. Run `./gradlew testDebugUnitTest verifyPaparazziDebug lintDebug assembleDebug` before pushing.
