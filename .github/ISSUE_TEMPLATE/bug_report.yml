@@ -1,0 +1,45 @@
+name: Bug report
+description: Something isn't working as expected
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for taking the time to report a bug. Please check existing issues first, and never paste your Pocket WiFi serial number.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you see, and what did you expect to see instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Connect to the inverter
+        2. Open the Details tab
+        3. ...
+    validations:
+      required: true
+  - type: input
+    id: inverter
+    attributes:
+      label: Inverter model and Pocket WiFi firmware
+      placeholder: X1-Hybrid G4, Pocket WiFi 3.0 firmware 3.006.04
+  - type: input
+    id: device
+    attributes:
+      label: Phone and Android version
+      placeholder: Pixel 7, Android 14
+  - type: input
+    id: version
+    attributes:
+      label: App version or commit
+      placeholder: v1.0.0 or a commit SHA
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or screenshots
+      description: Output from `adb logcat`, or screenshots. Remove your serial number first.
+      render: shell
