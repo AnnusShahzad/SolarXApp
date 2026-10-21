@@ -1,15 +1,22 @@
+# Gradle
+.gradle/
+build/
+
+# Android Studio / IntelliJ
+.idea/
 *.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+.externalNativeBuild/
+.cxx/
+captures/
+
+# Machine-specific SDK path
 local.properties
+
+# Build artifacts and signing keys: APKs are published on GitHub Releases
+*.apk
+*.aab
+*.jks
+*.keystore
+
+# OS files
+.DS_Store

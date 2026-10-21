@@ -1,32 +1,59 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.paparazzi)
 }
 
 android {
-    namespace = "com.example.solarx"
+    namespace = "io.github.annusshahzad.solarx"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.solarx"
+        applicationId = "io.github.annusshahzad.solarx"
         minSdk = 29
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        // The release workflow passes -PversionName=<tag>; the version code follows from it (1.2.3 -> 10203).
+        val version = (project.findProperty("versionName") as String?) ?: "1.0.0"
+        val (major, minor, patch) = Regex("""(\d+)\.(\d+)\.(\d+)""").matchEntire(version)
+            ?.destructured?.toList()?.map(String::toInt)
+            ?.takeIf { (_, minor, patch) -> minor < 100 && patch < 100 }
+            ?: throw GradleException("versionName must look like 1.2.3 with minor and patch below 100, got '$version'")
+        versionName = version
+        versionCode = major * 10_000 + minor * 100 + patch
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
     }
 
+    signingConfigs {
+        // Release builds are signed with the keystore from the environment when it is provided
+        // (see .github/workflows/release.yml), and with the debug key otherwise so that a
+        // locally built release APK can still be installed.
+        create("release") {
+            val keystore = System.getenv("SIGNING_KEYSTORE_PATH")
+            if (keystore != null) {
+                storeFile = file(keystore)
+                storePassword = System.getenv("SIGNING_KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("SIGNING_KEY_ALIAS")
+                keyPassword = System.getenv("SIGNING_KEY_PASSWORD")
+            }
+        }
+    }
+
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = if (System.getenv("SIGNING_KEYSTORE_PATH") != null) {
+                signingConfigs.getByName("release")
+            } else {
+                signingConfigs.getByName("debug")
+            }
         }
     }
     compileOptions {
@@ -40,7 +67,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.14"
     }
     packaging {
         resources {
@@ -52,6 +79,8 @@ android {
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
@@ -59,17 +88,11 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
+    implementation(libs.okhttp)
     debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson)
-    implementation(libs.ktor.client.core)
-    implementation(libs.ktor.client.cio)
-    implementation(libs.ktor.client.okhttp)
-    implementation(libs.ktor.client.content.negotiation)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.okhttp.mockwebserver)
+    // android.jar only ships stubs of org.json, so unit tests use the real library.
+    testImplementation(libs.json)
 }

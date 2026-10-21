@@ -1,3 +1,45 @@
 <resources>
     <string name="app_name">SolarX</string>
+
+    <!-- Login -->
+    <string name="login_tagline">Live monitor for SolaX inverters</string>
+    <string name="login_host_label">Inverter IP address</string>
+    <string name="login_host_hint">Shown in your router, or 192.168.10.10 on the dongle\'s own Wi-Fi</string>
+    <string name="login_serial_label">Pocket WiFi serial number</string>
+    <string name="login_serial_hint">Printed on the label of the Wi-Fi dongle</string>
+    <string name="login_button">Connect</string>
+    <string name="login_error_missing_fields">Enter the IP address and the serial number.</string>
+    <string name="login_error_invalid_address">That doesn\'t look like a valid IP address or host name.</string>
+    <string name="login_error_serial_spaces">The serial number can\'t contain spaces.</string>
+    <string name="login_error_wrong_serial">The inverter rejected this serial number.</string>
+    <string name="login_error_unreachable">Couldn\'t reach an inverter at %1$s. Check that your phone is on the same network.</string>
+
+    <!-- Navigation -->
+    <string name="tab_dashboard">Dashboard</string>
+    <string name="tab_details">Details</string>
+    <string name="tab_settings">Settings</string>
+
+    <!-- Monitor -->
+    <string name="watts">%1$d W</string>
+    <string name="solar">Solar</string>
+    <string name="home_load">Home load</string>
+    <string name="to_grid">To grid</string>
+    <string name="from_grid">From grid</string>
+    <string name="from_solar">From solar</string>
+    <string name="details_title">Detailed data</string>
+    <string name="waiting_for_data">Waiting for the first reading…</string>
+    <string name="offline_banner">Inverter unreachable · showing last reading</string>
+    <string name="grid_alert_banner">Drawing %1$d W from the grid, above your %2$d W limit</string>
+    <string name="energy_flow_description">Energy flow: solar %1$d W, grid %2$d W, home load %3$d W</string>
+
+    <!-- Settings -->
+    <string name="settings_alert_title">Grid power alert</string>
+    <string name="settings_alert_summary">Warn on the dashboard when grid draw exceeds a limit</string>
+    <string name="settings_threshold_title">Alert threshold</string>
+    <string name="settings_threshold_dialog_text">Show a warning when the house draws more than this many watts from the grid (WAPDA).</string>
+    <string name="settings_threshold_error">Enter a whole number of watts greater than 0.</string>
+    <string name="settings_change_inverter">Change inverter</string>
+    <string name="settings_change_inverter_summary">Connect to a different IP address or serial</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
 </resources>
