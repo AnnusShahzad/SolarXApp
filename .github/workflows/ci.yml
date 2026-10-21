@@ -21,7 +21,7 @@ jobs:
         with:
           distribution: temurin
           java-version: 21
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v6
       - name: Unit and screenshot tests, lint, build
         run: ./gradlew verifyPaparazziDebug lintDebug assembleDebug --no-daemon
       - name: Upload debug APK
