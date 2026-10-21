@@ -1,8 +1,6 @@
 <div align="center">
 
-<img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" alt="SolarX icon" width="96">
-
-<img src="docs/screenshots/dashboard-alert-dark.png" alt="SolarX dashboard" width="260">
+<img src="docs/banner.png" alt="SolarX: real-time SolaX inverter monitor for Android" width="100%">
 
 # SolarX
 
@@ -35,6 +33,7 @@ SolaX inverters ship with a Pocket WiFi dongle that uploads data to the vendor c
 | **Resilient polling** | When the inverter drops off the network, the last reading stays on screen with an offline banner, and polling resumes automatically. Polling pauses when the app is in the background to save battery. |
 | **Clear connection errors** | Separate messages for a missing field, an invalid address, a rejected serial and an unreachable inverter. |
 | **Private by design** | No backend, analytics or cloud. The saved serial (the dongle's password) is excluded from backups and device transfers. |
+| **Animated splash and adaptive icon** | The sun swells in, its rays spin out and the bolt strikes on launch (Android 12+). The launcher icon has a monochrome layer for Android 13+ themed icons. |
 | **Light and dark themes** | Material 3 styling that adapts to large system fonts, landscape and split screen, with accessibility labels on the diagram and status banners. |
 
 ## Screenshots

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Splash animation (Android 12+), 900 ms: the sun swells in, its rays spin out from behind it,
+    then the bolt strikes. The vector's own values are the end state, so Android 10 and 11,
+    which show the icon without animating, display the finished logo.
+-->
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/ic_launcher_foreground">
+    <target
+        android:name="sun"
+        android:animation="@animator/splash_sun" />
+    <target
+        android:name="rays"
+        android:animation="@animator/splash_rays" />
+    <target
+        android:name="bolt"
+        android:animation="@animator/splash_bolt" />
+</animated-vector>

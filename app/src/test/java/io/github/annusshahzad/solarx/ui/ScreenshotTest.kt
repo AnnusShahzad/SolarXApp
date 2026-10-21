@@ -1,10 +1,21 @@
 package io.github.annusshahzad.solarx.ui
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
+import io.github.annusshahzad.solarx.R
 import io.github.annusshahzad.solarx.data.GridAlert
 import io.github.annusshahzad.solarx.data.InverterReading
 import io.github.annusshahzad.solarx.ui.login.LoginError
@@ -71,6 +82,14 @@ class ScreenshotTest {
 
     @Test
     fun details() = snapshot { DetailsScreen(exporting, noPadding) }
+
+    /** The app logo; the README and the repository banner use this render. */
+    @Test
+    fun logo() = paparazzi.snapshot {
+        Box(Modifier.fillMaxSize().background(Color.White), contentAlignment = Alignment.Center) {
+            Image(painterResource(R.drawable.ic_logo), contentDescription = null, modifier = Modifier.size(320.dp))
+        }
+    }
 
     @Test
     fun settings() = snapshot {

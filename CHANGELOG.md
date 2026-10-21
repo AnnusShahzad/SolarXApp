@@ -4,7 +4,15 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-10-21
+
+### Added
+- New logo: an amber sun with a lightning bolt, as an adaptive launcher icon with a monochrome layer for themed icons.
+- Animated splash screen on Android 12+ (the sun swells in, the rays spin out and the bolt strikes), with a static logo on Android 10 and 11.
+- Repository banner and logo images.
+
 ### Changed
+- More breathing room in the dashboard: tiles keep clear of the panel's corners, tile text has more side margin, and the summary cards and banners have more padding.
 - Upgraded the toolchain: Gradle 9.8, Android Gradle Plugin 9.4 with built-in Kotlin, Kotlin 2.4 with the Compose compiler plugin, compileSdk 37 and targetSdk 36. Android 10 (API 29) is still the minimum.
 - Upgraded AndroidX (Compose BOM 2026.09, Core 1.19, Lifecycle 2.11, Activity 1.13, Navigation 2.10), OkHttp 5.5 and Paparazzi 2.0.
 - CI and releases build with JDK 21.
@@ -56,6 +64,7 @@ First public release.
 - Release builds are minified with R8, reducing the APK from 19.8 MB to about 2.3 MB.
 - The saved serial number is excluded from backups and device transfers.
 
-[Unreleased]: https://github.com/AnnusShahzad/SolarXApp/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/AnnusShahzad/SolarXApp/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/AnnusShahzad/SolarXApp/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/AnnusShahzad/SolarXApp/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/AnnusShahzad/SolarXApp/releases/tag/v1.0.0

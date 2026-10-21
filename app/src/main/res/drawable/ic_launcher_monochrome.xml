@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Single-colour version for Android 13+ themed icons: the bolt is cut out of the sun. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Scaled down so the rays keep a margin inside every launcher mask shape. -->
+    <group
+        android:pivotX="54"
+        android:pivotY="54"
+        android:scaleX="0.84"
+        android:scaleY="0.84">
+        <path
+            android:pathData="M54.00,29.50L54.00,23.50M71.32,36.68L75.57,32.43M78.50,54.00L84.50,54.00M71.32,71.32L75.57,75.57M54.00,78.50L54.00,84.50M36.68,71.32L32.43,75.57M29.50,54.00L23.50,54.00M36.68,36.68L32.43,32.43"
+            android:strokeColor="#FF000000"
+            android:strokeWidth="5"
+            android:strokeLineCap="round" />
+        <path
+            android:fillColor="#FF000000"
+            android:fillType="evenOdd"
+            android:pathData="M54,36a18,18 0,1 1,0 36a18,18 0,1 1,0 -36zM56.5,39L45,56.5L52.5,56.5L50.5,69L63,51L55.5,51L57.5,39z" />
+    </group>
+</vector>

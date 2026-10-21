@@ -161,7 +161,7 @@ private fun Banner(text: String, container: Color, content: Color) {
         modifier = Modifier
             .fillMaxWidth()
             .background(container)
-            .padding(horizontal = 16.dp, vertical = 10.dp)
+            .padding(horizontal = 20.dp, vertical = 12.dp)
             .semantics { liveRegion = LiveRegionMode.Polite },
     )
 }
@@ -182,7 +182,10 @@ private fun SummaryCard(title: String, watts: Int, modifier: Modifier = Modifier
         modifier = modifier,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
     ) {
-        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+        Column(
+            modifier = Modifier.padding(horizontal = 20.dp, vertical = 18.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
             Text(text = title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
             Text(text = stringResource(R.string.watts, watts), style = MaterialTheme.typography.headlineSmall)
         }
