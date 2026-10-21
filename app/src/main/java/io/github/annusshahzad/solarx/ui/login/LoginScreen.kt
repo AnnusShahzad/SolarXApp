@@ -93,7 +93,7 @@ fun LoginScreen(
                 verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
             ) {
                 Image(
-                    painter = painterResource(R.mipmap.ic_launcher),
+                    painter = painterResource(R.drawable.ic_logo),
                     contentDescription = null,
                     modifier = Modifier.size(96.dp),
                 )

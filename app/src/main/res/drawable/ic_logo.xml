@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The launcher icon as one vector, for use inside the app (painterResource can't load adaptive icons). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path android:pathData="M54,0a54,54 0,1 1,0 108a54,54 0,1 1,0 -108z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:endX="108"
+                android:endY="108"
+                android:startX="0"
+                android:startY="0"
+                android:type="linear">
+                <item android:color="#FF4A2C12" android:offset="0" />
+                <item android:color="#FF1E1208" android:offset="1" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <path
+        android:pathData="M54.00,29.50L54.00,23.50M71.32,36.68L75.57,32.43M78.50,54.00L84.50,54.00M71.32,71.32L75.57,75.57M54.00,78.50L54.00,84.50M36.68,71.32L32.43,75.57M29.50,54.00L23.50,54.00M36.68,36.68L32.43,32.43"
+        android:strokeColor="#FFFFB547"
+        android:strokeWidth="5"
+        android:strokeLineCap="round" />
+    <path android:pathData="M54,36a18,18 0,1 1,0 36a18,18 0,1 1,0 -36z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:centerX="49"
+                android:centerY="47"
+                android:gradientRadius="26"
+                android:type="radial">
+                <item android:color="#FFFFE7A3" android:offset="0" />
+                <item android:color="#FFF59E0B" android:offset="1" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <path
+        android:fillColor="#FF2B1B0E"
+        android:pathData="M56.5,39L45,56.5L52.5,56.5L50.5,69L63,51L55.5,51L57.5,39z" />
+</vector>

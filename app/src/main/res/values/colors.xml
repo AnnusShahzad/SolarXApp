@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash screen: the app background, with the logo on its dark brand tile. -->
+    <color name="splash_background">#FFFFF8F4</color>
+    <color name="splash_icon_background">#FF35200E</color>
+</resources>

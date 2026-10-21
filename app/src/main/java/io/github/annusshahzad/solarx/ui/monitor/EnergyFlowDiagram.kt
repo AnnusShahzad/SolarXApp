@@ -160,7 +160,7 @@ private class FlowGeometry(width: Float, height: Float, val tileHalf: Float) {
 }
 
 private val TileSize = 104.dp
-private val DiagramPadding = 16.dp
+private val DiagramPadding = 24.dp
 private const val MaxTileScale = 1.4f
 private val TileSpacing = 16.dp
 
@@ -168,10 +168,10 @@ private val TileSpacing = 16.dp
 private val TileInset = 10.dp
 
 /**
- * Smallest height, including the 16 dp margin and padding around it, at which the three
+ * Smallest height, including the 16 dp margin and 24 dp padding around it, at which the three
  * tiles fit without overlapping, even at the largest tile scale.
  */
-val EnergyFlowMinHeight = 380.dp
+val EnergyFlowMinHeight = 400.dp
 
 private val FixedProgress: State<Float> = object : State<Float> {
     override val value = 0.4f
@@ -185,14 +185,14 @@ private fun DrawScope.drawDot(measure: PathMeasure, progress: Float, color: Colo
 @Composable
 private fun FlowTile(@DrawableRes icon: Int, label: String, watts: Int, size: Dp) {
     // Proportional to the tile (and so independent of the font scale, which already sized the tile).
-    val (labelSize, valueSize) = with(LocalDensity.current) { (size * 0.096f).toSp() to (size * 0.144f).toSp() }
+    val (labelSize, valueSize) = with(LocalDensity.current) { (size * 0.088f).toSp() to (size * 0.132f).toSp() }
     Box(Modifier.size(size)) {
         Image(painter = painterResource(icon), contentDescription = null, modifier = Modifier.fillMaxSize())
         Column(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .fillMaxWidth()
-                .padding(start = size * 0.12f, end = size * 0.12f, bottom = size * 0.13f),
+                .padding(start = size * 0.16f, end = size * 0.16f, bottom = size * 0.15f),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
